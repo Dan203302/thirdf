@@ -26,12 +26,6 @@ export function SiteHeader() {
           >
             OSDR
           </a>
-          <a
-            href="/cms"
-            className="rounded-full px-3 py-1 transition-colors hover:bg-slate-800/80 hover:text-slate-50"
-          >
-            CMS
-          </a>
         </nav>
       </div>
     </header>
