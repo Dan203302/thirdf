@@ -55,10 +55,25 @@ begin
   fpSystem(copyCmd);
 end;
 
-var period: Integer;
+var
+  period: Integer;
+  runOnce: Boolean;
 begin
   Randomize;
   period := StrToIntDef(GetEnvDef('GEN_PERIOD_SEC', '300'), 300);
+  runOnce := SameText(GetEnvDef('LEGACY_RUN_ONCE', '0'), '1');
+
+  if runOnce then
+  begin
+    try
+      GenerateAndCopy();
+    except
+      on E: Exception do
+        WriteLn('Legacy error: ', E.Message);
+    end;
+    Halt(0);
+  end;
+
   while True do
   begin
     try
