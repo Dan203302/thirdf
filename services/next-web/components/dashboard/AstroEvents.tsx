@@ -7,7 +7,7 @@ type AstroEventsProps = {
 export function AstroEvents({ astro }: AstroEventsProps) {
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm">
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm fade-up-soft">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-sm font-semibold tracking-wide text-slate-100">
             Астрономические события
@@ -105,7 +105,7 @@ export function AstroEvents({ astro }: AstroEventsProps) {
               {astro.rows.map((row, idx) => (
                 <tr
                   key={`${row.name}-${row.when}-${idx}`}
-                  className="odd:bg-slate-900/40 even:bg-slate-900/10"
+                  className="odd:bg-slate-900/40 even:bg-slate-900/10 transition-colors hover:bg-slate-800/70"
                 >
                   <td className="px-3 py-2 text-[11px] text-slate-400">
                     {idx + 1}

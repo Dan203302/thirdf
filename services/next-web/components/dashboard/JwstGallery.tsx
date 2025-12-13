@@ -7,7 +7,7 @@ type JwstGalleryProps = {
 export function JwstGallery({ jwst }: JwstGalleryProps) {
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm">
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm fade-up-soft">
         <div className="flex items-center justify-between mb-3">
           <div>
             <h2 className="text-sm font-semibold tracking-wide text-slate-100">
@@ -52,7 +52,7 @@ export function JwstGallery({ jwst }: JwstGalleryProps) {
           </div>
         </div>
         <div className="relative">
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="flex gap-3 overflow-x-auto pb-2 scroll-smooth">
             {jwst.loading && (
               <div className="flex h-40 w-full items-center justify-center text-xs text-slate-400">
                 Загрузка…
@@ -71,7 +71,7 @@ export function JwstGallery({ jwst }: JwstGalleryProps) {
             {jwst.items.map((item, idx) => (
               <figure
                 key={idx}
-                className="group relative w-44 flex-shrink-0 overflow-hidden rounded-xl border border-slate-800/80 bg-slate-900/80 shadow-sm shadow-slate-900/60"
+                className="group relative w-44 flex-shrink-0 overflow-hidden rounded-xl border border-slate-800/80 bg-slate-900/80 shadow-sm shadow-slate-900/60 transition-transform duration-300 hover:-translate-y-1 hover:border-sky-500/70"
               >
                 <a href={item.link || item.url} target="_blank" rel="noreferrer">
                   <div className="relative h-40 overflow-hidden">

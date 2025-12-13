@@ -9,7 +9,7 @@ type MetricCardsProps = {
 export function MetricCards({ velocity, altitude, jwstLoading, jwstError, jwstCount }: MetricCardsProps) {
   return (
     <section className="grid gap-3 md:grid-cols-3">
-      <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm shadow-sky-900/40">
+      <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm shadow-sky-900/40 transition-transform duration-300 hover:-translate-y-1 hover:border-sky-500/60 fade-up-soft">
         <div className="flex items-center justify-between gap-3">
           <div>
             <div className="text-[11px] uppercase tracking-[0.26em] text-slate-400">
@@ -22,7 +22,7 @@ export function MetricCards({ velocity, altitude, jwstLoading, jwstError, jwstCo
           <div className="h-12 w-12 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-500 opacity-80 blur-xs" />
         </div>
       </div>
-      <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm shadow-emerald-900/40">
+      <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm shadow-emerald-900/40 transition-transform duration-300 hover:-translate-y-1 hover:border-emerald-500/60 fade-up-soft">
         <div className="flex items-center justify-between gap-3">
           <div>
             <div className="text-[11px] uppercase tracking-[0.26em] text-slate-400">
@@ -35,7 +35,7 @@ export function MetricCards({ velocity, altitude, jwstLoading, jwstError, jwstCo
           <div className="h-12 w-12 rounded-full bg-gradient-to-tr from-emerald-400 to-lime-400 opacity-80 blur-xs" />
         </div>
       </div>
-      <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm shadow-fuchsia-900/40">
+      <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm shadow-fuchsia-900/40 transition-transform duration-300 hover:-translate-y-1 hover:border-fuchsia-500/60 fade-up-soft">
         <div className="flex items-center justify-between gap-3">
           <div>
             <div className="text-[11px] uppercase tracking-[0.26em] text-slate-400">
