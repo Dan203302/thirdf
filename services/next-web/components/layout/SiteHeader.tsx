@@ -21,6 +21,12 @@ export function SiteHeader() {
             Dashboard
           </a>
           <a
+            href="/iss"
+            className="rounded-full px-3 py-1 transition-colors hover:bg-slate-800/80 hover:text-slate-50"
+          >
+            ISS
+          </a>
+          <a
             href="/osdr"
             className="rounded-full px-3 py-1 transition-colors hover:bg-slate-800/80 hover:text-slate-50"
           >
