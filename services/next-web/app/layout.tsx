@@ -26,6 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-slate-100`}
       >

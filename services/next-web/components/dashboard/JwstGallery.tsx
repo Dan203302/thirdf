@@ -2,9 +2,10 @@ import type { UseJwstGalleryResult } from "./hooks";
 
 type JwstGalleryProps = {
   jwst: UseJwstGalleryResult;
+  onSelect?: (index: number) => void;
 };
 
-export function JwstGallery({ jwst }: JwstGalleryProps) {
+export function JwstGallery({ jwst, onSelect }: JwstGalleryProps) {
   return (
     <div className="space-y-4">
       <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-sm fade-up-soft">
@@ -84,7 +85,10 @@ export function JwstGallery({ jwst }: JwstGalleryProps) {
                   </div>
                 </a>
                 <figcaption className="p-2">
-                  <div className="line-clamp-2 text-xs text-slate-200">
+                  <div
+                    className="line-clamp-2 text-xs text-slate-200 cursor-pointer hover:text-sky-300"
+                    onClick={() => onSelect?.(idx)}
+                  >
                     {item.caption || "Наблюдение JWST"}
                   </div>
                   <div className="mt-1 flex flex-wrap gap-1 text-[10px] text-slate-400">

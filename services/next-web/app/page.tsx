@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { AstroEvents } from "@/components/dashboard/AstroEvents";
 import { JwstGallery } from "@/components/dashboard/JwstGallery";
 import { MetricCards } from "@/components/dashboard/MetricCards";
+import { IssOrbitPanel } from "@/components/dashboard/IssOrbitPanel";
+import { JwstFeatured } from "@/components/dashboard/JwstFeatured";
 import {
   useAstroEvents,
   useIssTelemetry,
@@ -13,6 +16,10 @@ export default function Home() {
   const iss = useIssTelemetry();
   const jwst = useJwstGallery();
   const astro = useAstroEvents();
+
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const featuredItem =
+    jwst.items[featuredIndex] || jwst.items[0] || null;
 
   const velocity = iss.metrics.velocity;
   const altitude = iss.metrics.altitude;
@@ -27,7 +34,15 @@ export default function Home() {
         jwstCount={jwst.items.length}
       />
       <section className="grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-        <JwstGallery jwst={jwst} />
+        <JwstFeatured
+          item={featuredItem}
+          loading={jwst.loading}
+          error={jwst.error}
+        />
+        <IssOrbitPanel />
+      </section>
+      <section className="grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <JwstGallery jwst={jwst} onSelect={setFeaturedIndex} />
         <AstroEvents astro={astro} />
       </section>
     </div>
