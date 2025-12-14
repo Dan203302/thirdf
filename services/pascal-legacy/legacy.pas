@@ -21,7 +21,9 @@ procedure GenerateAndCopy();
 var
   outDir, fn, fullpath, pghost, pgport, pguser, pgpass, pgdb, copyCmd: string;
   f: TextFile;
-  ts: string;
+  ts, okStr: string;
+  voltage, temp: Double;
+  ok: Boolean;
 begin
   outDir := GetEnvDef('CSV_OUT_DIR', '/data/csv');
   ts := FormatDateTime('yyyymmdd_hhnnss', Now);
@@ -31,10 +33,15 @@ begin
   // write CSV
   AssignFile(f, fullpath);
   Rewrite(f);
-  Writeln(f, 'recorded_at,voltage,temp,source_file');
+  voltage := RandFloat(3.2, 12.6);
+  temp := RandFloat(-50.0, 80.0);
+  ok := (voltage >= 3.0) and (voltage <= 12.6) and (temp >= -40.0) and (temp <= 75.0);
+  okStr := BoolToStr(ok, True);
+  Writeln(f, 'recorded_at,is_ok,voltage,temp,source_file');
   Writeln(f, FormatDateTime('yyyy-mm-dd hh:nn:ss', Now) + ',' +
-             FormatFloat('0.00', RandFloat(3.2, 12.6)) + ',' +
-             FormatFloat('0.00', RandFloat(-50.0, 80.0)) + ',' +
+             okStr + ',' +
+             FormatFloat('0.00', voltage) + ',' +
+             FormatFloat('0.00', temp) + ',' +
              fn);
   CloseFile(f);
 
@@ -48,7 +55,7 @@ begin
   // Use psql with COPY FROM PROGRAM for simplicity
   // Here we call psql reading from file
   copyCmd := 'psql "host=' + pghost + ' port=' + pgport + ' user=' + pguser + ' dbname=' + pgdb + '" ' +
-             '-c "\copy telemetry_legacy(recorded_at, voltage, temp, source_file) FROM ''' + fullpath + ''' WITH (FORMAT csv, HEADER true)"';
+             '-c "\copy telemetry_legacy(recorded_at, is_ok, voltage, temp, source_file) FROM ''' + fullpath + ''' WITH (FORMAT csv, HEADER true)"';
   // Mask password via env
   SetEnvironmentVariable('PGPASSWORD', pgpass);
   // Execute

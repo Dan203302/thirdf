@@ -252,3 +252,46 @@ export function useAstroEvents(): UseAstroEventsResult {
 
   return { rows, raw, loading, error, load, query };
 }
+
+export type LegacyRow = {
+  id: number;
+  recorded_at: string;
+  is_ok: boolean;
+  voltage: number;
+  temp: number;
+  source_file: string;
+};
+
+export type UseLegacyTelemetryResult = {
+  rows: LegacyRow[];
+  loading: boolean;
+  error: string | null;
+  reload: () => void;
+};
+
+export function useLegacyTelemetry(): UseLegacyTelemetryResult {
+  const [rows, setRows] = useState<LegacyRow[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function load() {
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await fetch("/api/legacy?limit=500");
+      const json = (await res.json()) as { items?: LegacyRow[] };
+      setRows(Array.isArray(json.items) ? json.items : []);
+    } catch (e) {
+      setError("Ошибка загрузки legacy-данных");
+      setRows([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  return { rows, loading, error, reload: load };
+}
